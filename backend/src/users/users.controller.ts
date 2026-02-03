@@ -12,7 +12,10 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
+  @ApiOperation({ summary: 'Create a new user' })
+  @ApiCreatedResponse({ type: ResponseUserDto })
+  @ApiBadRequestResponse()
+  create(@Body() createUserDto: CreateUserDto): Promise<ResponseUserDto> {
     return this.usersService.create(createUserDto);
   }
 
