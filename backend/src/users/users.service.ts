@@ -4,8 +4,20 @@ import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(
+    @InjectRepository(User)
+    private usersRepository: Repository<User>,
+  ) {}
+
+  private toResponse(user: User): ResponseUserDto {
+    const { password, ...rest } = user as any;
+    return rest as ResponseUserDto;
+  }
+
+  async create(createUserDto: CreateUserDto): Promise<ResponseUserDto> {
+    const user = this.usersRepository.create(createUserDto);
+    const saved = await this.usersRepository.save(user);
+    return this.toResponse(saved);
   }
 
   async findAll(): Promise<ResponseUserDto[]> {
