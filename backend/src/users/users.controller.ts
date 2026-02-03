@@ -44,8 +44,14 @@ export class UsersController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
+  @ApiOperation({ summary: 'Update a user by id' })
+  @ApiOkResponse({ type: ResponseUserDto })
+  @ApiBadRequestResponse()
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateUserDto: UpdateUserDto,
+  ): Promise<ResponseUserDto> {
+    return this.usersService.update(id, updateUserDto);
   }
 
   @Delete(':id')
