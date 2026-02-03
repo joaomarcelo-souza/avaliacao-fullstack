@@ -108,8 +108,9 @@ export class UsersService {
 
     if (!user) throw new NotFoundException('User not found');
 
-    // Plaintext comparison — TODO: use bcrypt.compare when hashing is added
-    if (user.password !== password) throw new UnauthorizedException('Invalid credentials');
+    // Compare plaintext password with stored hash
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) throw new UnauthorizedException('Invalid credentials');
 
     return this.toResponse(user);
   }
