@@ -1,5 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 
+/**
+ * DTO returned by API endpoints when exposing user data.
+ * Note: This DTO intentionally omits the password field.
+ */
 export class ResponseUserDto {
   @ApiProperty({
     description: 'ID do usuário',

@@ -1,7 +1,12 @@
 import { IsString, IsEmail, Matches, MinLength, MaxLength } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
+/**
+ * Data Transfer Object for creating a user.
+ * Validation rules are enforced via class-validator decorators.
+ */
 export class CreateUserDto {
+  /** Full name: letters and spaces only */
   @ApiProperty({
     description: 'Nome completo do usuário (somente letras e espaços)',
     example: 'João Silva',
@@ -12,6 +17,7 @@ export class CreateUserDto {
   })
   name: string;
 
+  /** Unique email for the user */
   @ApiProperty({
     description: 'Email do usuário (único)',
     example: 'joao.silva@email.com',
@@ -19,6 +25,7 @@ export class CreateUserDto {
   @IsEmail()
   email: string;
 
+  /** Numeric registration number / matricula */
   @ApiProperty({
     description: 'Matrícula do usuário (somente números)',
     example: '123456',
@@ -29,6 +36,7 @@ export class CreateUserDto {
   })
   matricula: string;
 
+  /** Password: exactly 6 alphanumeric characters */
   @ApiProperty({
     description: 'Senha do usuário (exatamente 6 caracteres alfanuméricos)',
     example: 'Abc123',
