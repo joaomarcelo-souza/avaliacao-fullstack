@@ -40,7 +40,9 @@ export class UsersService {
    * @returns created user mapped to ResponseUserDto
    */
   async create(createUserDto: CreateUserDto): Promise<ResponseUserDto> {
-    const user = this.usersRepository.create(createUserDto);
+    // Hash password before saving
+    const hashed = await bcrypt.hash(createUserDto.password, 10);
+    const user = this.usersRepository.create({ ...createUserDto, password: hashed });
     const saved = await this.usersRepository.save(user);
     return this.toResponse(saved);
   }
