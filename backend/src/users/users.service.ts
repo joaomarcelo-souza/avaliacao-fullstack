@@ -74,6 +74,10 @@ export class UsersService {
    * Returns the updated user.
    */
   async update(id: number, updateUserDto: UpdateUserDto): Promise<ResponseUserDto> {
+    // If password is being updated, hash it first
+    if (updateUserDto.password) {
+      updateUserDto.password = await bcrypt.hash(updateUserDto.password, 10);
+    }
     await this.usersRepository.update(id, updateUserDto);
     return this.findOne(id);
   }
