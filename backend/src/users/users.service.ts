@@ -20,7 +20,21 @@ export class UsersService {
     return `This action updates a #${id} user`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number): Promise<void> {
+    const result = await this.usersRepository.delete(id);
+    if (result.affected === 0) throw new NotFoundException('User not found');
+    return;
+  }
+
+  async login(loginUserDto: LoginUserDto): Promise<ResponseUserDto> {
+    const { identifier, password } = loginUserDto;
+
+    let user = await this.usersRepository.findOneBy({ email: identifier });
+    if (!user) user = await this.usersRepository.findOneBy({ matricula: identifier });
+
+    if (!user) throw new NotFoundException('User not found');
+    if (user.password !== password) throw new UnauthorizedException('Invalid credentials');
+
+    return this.toResponse(user);
   }
 }
