@@ -36,8 +36,11 @@ export class UsersController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+  @ApiOperation({ summary: 'Get a user by id' })
+  @ApiOkResponse({ type: ResponseUserDto })
+  @ApiNotFoundResponse()
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<ResponseUserDto> {
+    return this.usersService.findOne(id);
   }
 
   @Patch(':id')
