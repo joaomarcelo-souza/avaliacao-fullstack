@@ -6,6 +6,7 @@ import { ResponseUserDto } from './dto/response-user.dto';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as bcrypt from 'bcryptjs';
 
 /**
  * Service that encapsulates business logic related to users.
@@ -40,7 +41,9 @@ export class UsersService {
    * @returns created user mapped to ResponseUserDto
    */
   async create(createUserDto: CreateUserDto): Promise<ResponseUserDto> {
-    const user = this.usersRepository.create(createUserDto);
+    // Hash password before saving
+    const hashed = await bcrypt.hash(createUserDto.password, 10);
+    const user = this.usersRepository.create({ ...createUserDto, password: hashed });
     const saved = await this.usersRepository.save(user);
     return this.toResponse(saved);
   }
@@ -72,6 +75,10 @@ export class UsersService {
    * Returns the updated user.
    */
   async update(id: number, updateUserDto: UpdateUserDto): Promise<ResponseUserDto> {
+    // If password is being updated, hash it first
+    if (updateUserDto.password) {
+      updateUserDto.password = await bcrypt.hash(updateUserDto.password, 10);
+    }
     await this.usersRepository.update(id, updateUserDto);
     return this.findOne(id);
   }
@@ -102,8 +109,9 @@ export class UsersService {
 
     if (!user) throw new NotFoundException('User not found');
 
-    // Plaintext comparison — TODO: use bcrypt.compare when hashing is added
-    if (user.password !== password) throw new UnauthorizedException('Invalid credentials');
+    // Compare plaintext password with stored hash
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) throw new UnauthorizedException('Invalid credentials');
 
     return this.toResponse(user);
   }

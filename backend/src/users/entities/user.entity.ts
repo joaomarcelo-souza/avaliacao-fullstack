@@ -7,13 +7,12 @@ import { Entity, PrimaryGeneratedColumn, Column, Unique, Check } from 'typeorm';
  * - email must be unique
  * - name must match the letters-and-spaces regex
  * - matricula must be numeric
- * - password must be exactly 6 alphanumeric chars (current requirement)
+ * - password will be stored as a bcrypt hash (DB-level check removed)
  */
 @Entity('users')
 @Unique(['email'])
 @Check(`"name" ~ '^[A-Za-zÀ-ÿ ]+$'`)
 @Check(`"matricula" ~ '^[0-9]+$'`)
-@Check(`"password" ~ '^[A-Za-z0-9]{6}$'`)
 export class User {
   /** Primary key */
   @PrimaryGeneratedColumn()
@@ -31,7 +30,7 @@ export class User {
   @Column()
   matricula: string;
 
-  /** Password (stored as plaintext for now) */
+  /** Password (stored as a bcrypt hash) */
   @Column()
   password: string;
 }
