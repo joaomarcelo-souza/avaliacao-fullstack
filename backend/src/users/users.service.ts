@@ -8,8 +8,9 @@ export class UsersService {
     return 'This action adds a new user';
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async findAll(): Promise<ResponseUserDto[]> {
+    const users = await this.usersRepository.find();
+    return users.map((u) => this.toResponse(u));
   }
 
   async findOne(id: number): Promise<ResponseUserDto> {
