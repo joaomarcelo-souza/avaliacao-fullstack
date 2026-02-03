@@ -19,6 +19,15 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
+  @Post('login')
+  @ApiOperation({ summary: 'Authenticate user by email or matricula' })
+  @ApiOkResponse({ type: ResponseUserDto })
+  @ApiBadRequestResponse()
+  @ApiUnauthorizedResponse()
+  login(@Body() loginUserDto: LoginUserDto): Promise<ResponseUserDto> {
+    return this.usersService.login(loginUserDto);
+  }
+
   @Get()
   findAll() {
     return this.usersService.findAll();
