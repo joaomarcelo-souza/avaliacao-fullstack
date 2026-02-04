@@ -1,7 +1,6 @@
 import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { LoginUserDto } from './dto/login-user.dto';
 import { ResponseUserDto } from './dto/response-user.dto';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
@@ -91,28 +90,5 @@ export class UsersService {
     const result = await this.usersRepository.delete(id);
     if (result.affected === 0) throw new NotFoundException('User not found');
     return;
-  }
-
-  /**
-   * Authenticate a user using either email or matricula and a password.
-   * Note: Currently compares plaintext passwords — replace with hashed comparison.
-   *
-   * @param loginUserDto - contains identifier (email|matricula) and password
-   * @returns authenticated user mapped to ResponseUserDto
-   */
-  async login(loginUserDto: LoginUserDto): Promise<ResponseUserDto> {
-    const { identifier, password } = loginUserDto;
-
-    // Try email first, then fallback to matricula
-    let user = await this.usersRepository.findOneBy({ email: identifier });
-    if (!user) user = await this.usersRepository.findOneBy({ matricula: identifier });
-
-    if (!user) throw new NotFoundException('User not found');
-
-    // Compare plaintext password with stored hash
-    const match = await bcrypt.compare(password, user.password);
-    if (!match) throw new UnauthorizedException('Invalid credentials');
-
-    return this.toResponse(user);
   }
 }
