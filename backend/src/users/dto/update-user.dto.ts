@@ -3,7 +3,12 @@ import { CreateUserDto } from './create-user.dto';
 import { IsOptional, IsString, IsEmail, Matches, MinLength, MaxLength } from 'class-validator';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 
+/**
+ * DTO for partial updates of a user. Inherits validations from CreateUserDto
+ * but makes all fields optional.
+ */
 export class UpdateUserDto extends PartialType(CreateUserDto) {
+  /** Optional full name */
   @ApiPropertyOptional({
     description: 'Nome completo do usuário (somente letras e espaços)',
     example: 'João da Silva',
@@ -15,6 +20,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   })
   name?: string;
 
+  /** Optional email */
   @ApiPropertyOptional({
     description: 'Email do usuário (único)',
     example: 'joao.silva.novo@email.com',
@@ -23,6 +29,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @IsEmail()
   email?: string;
 
+  /** Optional matricula */
   @ApiPropertyOptional({
     description: 'Matrícula do usuário (somente números)',
     example: '654321',
@@ -34,6 +41,7 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   })
   matricula?: string;
 
+  /** Optional password (exactly 6 alphanumeric characters) */
   @ApiPropertyOptional({
     description: 'Senha do usuário (exatamente 6 caracteres alfanuméricos)',
     example: 'Xyz789',

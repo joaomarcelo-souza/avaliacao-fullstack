@@ -1,0 +1,26 @@
+.top-bar{
+    display: flex;
+    justify-content: flex-end;
+
+    background-color: #ffffff;
+
+    padding: 16px 62px;
+
+    box-shadow: 0px 3px 5px #15223214;
+    opacity: 1;
+
+    .user-icon {
+        width: 48px;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        background-color: #0B2B25;
+        color: #ffffff;
+
+        font-family: 'Manrope', sans-serif;
+    }
+}
