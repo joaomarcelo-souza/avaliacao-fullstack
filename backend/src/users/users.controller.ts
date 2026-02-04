@@ -3,7 +3,6 @@ import { ApiTags, ApiCreatedResponse, ApiOkResponse, ApiNoContentResponse, ApiBa
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { LoginUserDto } from './dto/login-user.dto';
 import { ResponseUserDto } from './dto/response-user.dto';
 
 /**
@@ -25,19 +24,6 @@ export class UsersController {
   @ApiBadRequestResponse()
   create(@Body() createUserDto: CreateUserDto): Promise<ResponseUserDto> {
     return this.usersService.create(createUserDto);
-  }
-
-  /**
-   * POST /users/login
-   * Authenticate a user using email or matricula.
-   */
-  @Post('login')
-  @ApiOperation({ summary: 'Authenticate user by email or matricula' })
-  @ApiOkResponse({ type: ResponseUserDto })
-  @ApiBadRequestResponse()
-  @ApiUnauthorizedResponse()
-  login(@Body() loginUserDto: LoginUserDto): Promise<ResponseUserDto> {
-    return this.usersService.login(loginUserDto);
   }
 
   /**

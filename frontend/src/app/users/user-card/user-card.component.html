@@ -1,0 +1,7 @@
+<section>
+  <p>{{ user.name }}</p>
+  <p>{{ user.email }}</p>
+  <p>{{ user.matricula }}</p>
+  <button (click)="editUser()" aria-label="Editar {{ user.name }}">Editar</button>
+  <button (click)="deleteUser()" aria-label="Excluir {{ user.name }}">Excluir</button>
+</section>
