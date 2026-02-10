@@ -1,0 +1,59 @@
+.side-bar-container {
+  width: 336px;
+  height: 100%;
+  background: #0d1931 0% 0% no-repeat padding-box;
+  box-shadow: 7px 0px 6px #0000002c;
+  opacity: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  .top-container {
+    margin-top: 43px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    > img {
+      width: 235px;
+      height: 36px;
+    }
+
+    .navbar {
+      margin: 0px 15px;
+
+      .home-button {
+        width: 304px;
+        height: 54px;
+        background: #0080fe00 0% 0% no-repeat padding-box;
+        border-radius: 6px;
+        opacity: 1;
+        border: 0px solid #000000;
+
+        text-align: left;
+        font-family: 'Manrope', sans-serif;
+        letter-spacing: 0px;
+        color: #ffffff;
+        opacity: 0.9;
+        font-size: 16px;
+      }
+      .users-button {
+        width: 261px;
+        height: 37px;
+        background: #00e08100 0% 0% no-repeat padding-box;
+        border-radius: 4px;
+        opacity: 1;
+        border: 0px solid #000000;
+
+        text-align: left;
+        font-family: 'Manrope', sans-serif;
+        letter-spacing: 0px;
+        color: #ffffff;
+        opacity: 0.9;
+        font-size: 16px;
+      }
+    }
+  }
+}
