@@ -3,10 +3,11 @@ import { TitleCasePipe } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { computed, signal } from '@angular/core';
 import { TopBar } from '../../components/top-bar/top-bar.component';
+import { SideBar } from '../../components/side-bar/side-bar.component';
 
 @Component({
   selector: 'app-home',
-  imports: [TopBar],
+  imports: [TopBar, SideBar],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

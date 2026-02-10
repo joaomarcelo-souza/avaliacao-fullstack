@@ -1,19 +1,25 @@
-<app-top-bar></app-top-bar>
+<div class="home-container">
+  <app-side-bar></app-side-bar>
 
-<body class="body-home">
-  <section class="home-main-container">
-    <h3 class="home-title">Home</h3>
+  <div class="home-content">
+    <app-top-bar></app-top-bar>
 
-    <section class="home-main-section">
-      <div class="home-welcome-message">
-        <span class="home-welcome-text">Olá Milena!</span>
-        <span class="home-date">{{ formattedDate() }}</span>
-      </div>
+    <body class="body-home">
+      <section class="home-main-container">
+        <h3 class="home-title">Home</h3>
 
-      <div class="home-image-container">
-        <img src="home.svg" alt="Home image" />
-        <span>Bem-vindo ao WenLock!</span>
-      </div>
-    </section>
-  </section>
-</body>
+        <section class="home-main-section">
+          <div class="home-welcome-message">
+            <span class="home-welcome-text">Olá Milena!</span>
+            <span class="home-date">{{ formattedDate() }}</span>
+          </div>
+
+          <div class="home-image-container">
+            <img src="home.svg" alt="Home image" />
+            <span>Bem-vindo ao WenLock!</span>
+          </div>
+        </section>
+      </section>
+    </body>
+  </div>
+</div>
