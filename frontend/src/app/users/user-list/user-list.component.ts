@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { UserCard } from '../user-card/user-card.component';
 import { User } from '../models/user.model';
 import { AbstractUserService } from '../services/abstract-user.service';
