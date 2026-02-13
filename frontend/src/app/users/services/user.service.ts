@@ -3,7 +3,7 @@ import { AbstractUserService } from './abstract-user.service';
 import { User } from '../models/user.model';
 import { OperationResult } from '../../models/operation-result.model';
 import { catchError, map, Observable, of, throwError } from 'rxjs';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environments';
 
 @Injectable()
@@ -101,7 +101,7 @@ export class UserService extends AbstractUserService {
 
   // --- DELETE ---
   remove(id: number): Observable<OperationResult> {
-    return this.http.delete<any>(`${environment.apiUrl}/users/${id}`).pipe(
+    return this.http.delete<User>(`${environment.apiUrl}/users/${id}`).pipe(
       map(() => {
         this._users.update((users) => users.filter((u) => u.id !== id));
         // backend responds with 204 No Content on success
