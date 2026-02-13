@@ -9,7 +9,7 @@ import { AbstractUserService } from '../services/abstract-user.service';
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss',
 })
-export class UserList {
+export class UserList implements OnInit {
   private userService = inject(AbstractUserService);
 
   users = this.userService.users;
