@@ -8,6 +8,8 @@
   display: flex;
   flex-direction: column;
 
+  justify-content: space-between;
+
   .top-container {
     margin-top: 43px;
 
@@ -54,6 +56,31 @@
         opacity: 0.9;
         font-size: 16px;
       }
+    }
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: column;
+    margin-left: 40px;
+    margin-bottom: 27px;
+
+    .wenlock_cr {
+      text-align: left;
+      font-family: 'Manrope', sans-serif;
+      font-size: 18px;
+      letter-spacing: 0px;
+      color: #ffffff;
+      opacity: 1;
+    }
+
+    .power_by {
+      font-family: 'Manrope', sans-serif;
+      text-align: left;
+      letter-spacing: 0px;
+      color: #aacbc4;
+      opacity: 1;
+      font-size: 12px;
     }
   }
 }
