@@ -1,4 +1,4 @@
-# avaliacao-fullstack
+# crud-user
 
 CRUD completo para gerenciamento de usuários, abrangendo backend (NestJS + TypeORM + PostgreSQL) e frontend (Angular).
 
@@ -27,7 +27,7 @@ DB_HOST=localhost
 DB_PORT=5432
 DB_USER=postgres
 DB_PASS=senha_do_postgres
-DB_NAME=avaliacao_fullstack
+DB_NAME=crud_user
 ```
 
 ### Frontend
